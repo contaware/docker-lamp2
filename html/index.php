@@ -28,6 +28,7 @@
         {
             echo "Connection with MySQLi failed: " . $e->getMessage() . "<br>";
         }
+        
         echo "Note: \"Connection refused\" is returned when the DB server is starting.</pre>";
     }
 ?>
@@ -36,10 +37,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docker LAMP</title>
+    <title>Docker LAMP2</title>
 </head>
 <body>
-    <h1>Docker LAMP</h1>
+    <h1>Docker LAMP2</h1>
     <?php
         // Information
         echo "<h2>Information</h2>\n";

@@ -2,36 +2,36 @@ services:
   web:
     build: .
     ports:
-      - "8888:80"                      # map your PC port to the container port
+      - "8888:80"                      # map your computer port to the container port
     depends_on:
       - mysqldb
       - mariadb
     volumes:
-      - ./html:/var/www/html           # map content of ./html in your PC to /var/www/html of container
+      - ./html:/var/www/html           # map content of ./html in your computer to /var/www/html of container
   mysqldb:
     image: mysql:8.1.0                 # set the mysql version you need for your project
-    environment:                       # IF CHANGING THESE PLEASE FIRST DELETE ./mysqldb_data/
+    environment:
       - MYSQL_ROOT_PASSWORD=1234       # set mysql root pw or use: MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=blogdb          # this is optional, name a database to be created on image creation
       - MYSQL_USER=blog                # this is optional, name a user to be created on image create
       - MYSQL_PASSWORD=1234            # this is optional, password for the above created user
       - MYSQL_TCP_PORT=3306            # this is optional, default port is 3306
     volumes:
-      - ./mysqldb_data:/var/lib/mysql  # map content of ./mysqldb_data in your PC to /var/lib/mysql of container
+      - ./mysqldb_data:/var/lib/mysql  # map content of ./mysqldb_data in your computer to /var/lib/mysql of container
   mariadb:
     image: mariadb:10.6                # set the mariadb version you need for your project
-    environment:                       # IF CHANGING THESE PLEASE FIRST DELETE ./mariadb_data/
+    environment:
       - MYSQL_ROOT_PASSWORD=1234       # set mysql root pw or use: MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=blogdb          # this is optional, name a database to be created on image creation
       - MYSQL_USER=blog                # this is optional, name a user to be created on image create
       - MYSQL_PASSWORD=1234            # this is optional, password for the above created user
       - MYSQL_TCP_PORT=3306            # this is optional, default port is 3306
     volumes:
-     - ./mariadb_data:/var/lib/mysql   # map content of ./mariadb_data in your PC to /var/lib/mysql of container
+     - ./mariadb_data:/var/lib/mysql   # map content of ./mariadb_data in your computer to /var/lib/mysql of container
   phpmyadmin:
     image: phpmyadmin:5.2.2            # set the phpmyadmin version you need for your project
     ports:
-      - "8080:80"                      # map your PC port to the container port
+      - "8080:80"                      # map your computer port to the container port
     depends_on:
       - mysqldb
       - mariadb

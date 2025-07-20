@@ -1,8 +1,21 @@
 services:
-  web:
-    build: .
+  web1:
+    build:
+      context: .
+      dockerfile: Dockerfile1
     ports:
       - "8888:80"                      # map your computer port to the container port
+    depends_on:
+      - mysqldb
+      - mariadb
+    volumes:
+      - ./html:/var/www/html           # map content of ./html in your computer to /var/www/html of container
+  web2:
+    build:
+      context: .
+      dockerfile: Dockerfile2
+    ports:
+      - "8880:80"                      # map your computer port to the container port
     depends_on:
       - mysqldb
       - mariadb

@@ -1,10 +1,10 @@
 # LAMP2 stack built with Docker Compose
 
-A simple LAMP2 (Linux Apache MySQL MariaDB PHP) stack environment built using Docker Compose. It is meant for local development and not for production usage. It consists of:
+A Dual LAMP (Linux Apache MySQL PHP) stack environment built using Docker Compose. It is meant for local development and not for production usage. It consists of:
 
 - PHP
-- Apache
-- Dual MySQL and MariaDB
+- Two Apache servers, with two different PHP versions
+- Two database servers, MySQL and MariaDB
 - phpMyAdmin (it's possible to choose between MySQL and MariaDB)
 
 
@@ -12,7 +12,7 @@ A simple LAMP2 (Linux Apache MySQL MariaDB PHP) stack environment built using Do
 
 Clone this repository to your local computer:
 
-```shell
+```bash
 git clone https://github.com/contaware/docker-lamp2.git
 ```
 
@@ -35,16 +35,16 @@ git clone https://github.com/contaware/docker-lamp2.git
 2. Run `docker compose down`
 3. If only *./compose.yaml* has been changed:  
    `docker compose up -d`  
-   If *./Dockerfile* has been changed:  
+   If a *Dockerfile* has been changed:  
    `docker compose up -d --build`
 
-### Web Server and PHP
+### Web Servers and PHP
 
-Apache is set to run on port **8888**, access it through <http://localhost:8888>. Change the port in *./compose.yaml* file.
+There are two apache servers, the first is listening on <http://localhost:8888> and the second on <http://localhost:8880>. Change the ports in *./compose.yaml* file.
 
 Place your web project files into *./html*.
 
-The installed PHP version along the extensions can be configured in *./Dockerfile* file.
+The installed PHP versions along the extensions can be configured in *./Dockerfile1* and *./Dockerfile2* files.
 
 ### Database Servers
 
@@ -54,6 +54,6 @@ Other than the **root** user, there is also a **blog** user with a **blogdb** da
 
 ### phpMyAdmin
 
-phpMyAdmin is configured to run on port **8080**, access it through <http://localhost:8080>. Either select MySQL or MariaDB and use the credentials reported in the previous section.
+phpMyAdmin is accessed through <http://localhost:8080>. Either select MySQL or MariaDB and use the credentials reported in the previous section.
 
 Change version and port in *./compose.yaml*.

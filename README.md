@@ -22,20 +22,20 @@ git clone https://github.com/contaware/docker-lamp2.git
 ### Start servers
 
 1. Enter the project directory: `cd docker-lamp2/`
-2. Run `docker compose up -d` 
+2. Run: `docker compose up -d` 
 
 ### Stop servers
 
 1. Enter the project directory: `cd docker-lamp2/`
-2. Run `docker compose down`
+2. Run: `docker compose down`
 
 ### After configuration changes
 
 1. Enter the project directory: `cd docker-lamp2/`
-2. Run `docker compose down`
-3. If only *./compose.yaml* has been changed:  
+2. Run: `docker compose down`
+3. If *./compose.yaml* has been changed, run:  
    `docker compose up -d`  
-   If a *Dockerfile* has been changed:  
+   If a *Dockerfile* has been changed, run:  
    `docker compose up -d --build`
 
 ### Web Servers and PHP

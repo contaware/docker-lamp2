@@ -42,7 +42,7 @@ git clone https://github.com/contaware/docker-lamp2.git
 
 There are two apache servers, the first is listening on <http://localhost:8888> and the second on <http://localhost:8880>. Change the ports in *./compose.yaml* file.
 
-Place your web project files into *./html*.
+Place your web project files into *./html/* directory.
 
 The installed PHP versions along the extensions can be configured in *./Dockerfile1* and *./Dockerfile2* files.
 

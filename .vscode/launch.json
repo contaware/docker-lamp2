@@ -1,6 +1,6 @@
 {
     // 1. "Listen for Xdebug" is used when you debug your PHP files 
-    //    loading them in your browser from the web1 or web2 servers.
+    //    loading them in your browser from the web server.
     //    See also "Remote Host Debugging" section here:
     //    https://github.com/xdebug/vscode-php-debug
     //

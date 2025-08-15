@@ -26,7 +26,7 @@ services:
       - ./xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini    # map xdebug.ini into the container
       - ./error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini # map error_reporting.ini into the container
   mysqldb:
-    image: mysql:8.1.0                 # set the mysql version you need for your project
+    image: mysql:9.4                   # set the mysql version you need for your project
     environment:
       - MYSQL_ROOT_PASSWORD=1234       # set mysql root pw or use: MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=blogdb          # this is optional, name a database to be created on image creation

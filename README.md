@@ -44,7 +44,7 @@ There are two apache servers, the first is listening on <http://localhost:8888> 
 
 Place your web project files into *./html/* directory.
 
-The installed PHP versions along the extensions can be configured in *./Dockerfile1* and *./Dockerfile2* files.
+The PHP version is selected in *./compose.yaml* through a *Dockerfile*.
 
 ### Database Servers
 

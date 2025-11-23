@@ -55,3 +55,4 @@ services:
     environment:
       - PMA_HOSTS=mysqldb,mariadb      # if having only one host use PMA_HOST
       - PMA_PORTS=3306,3306            # if having only one port use PMA_PORT
+      - UPLOAD_LIMIT=512M              # set upload_max_filesize and post_max_size

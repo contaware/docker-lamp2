@@ -2,64 +2,99 @@
     function testDBConnection($servername, $dbname, $username, $password)
     {
         echo "<h2>Test the connection to $servername</h2>\n";
-        echo "<pre>";
 
         // Test PDO
+        echo "<strong>Test with PDO</strong><br>\n";
         try
         {
+            // Create connection and do query
             $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
-            echo "Connected successfully (with PDO)<br>";
-            $conn = null; // close connection
+            $res = $conn->query("SHOW DATABASES");
+            
+            // Loop through the database names
+            $first = true;
+            while ($name = $res->fetchColumn(0))
+            {
+                if ($first)
+                {
+                    $first = false;
+                    echo "List of databases: ";
+                }
+                echo $name . ' ';
+            }
+            echo "<br>\n";
+
+            // Close
+            $conn = null;
         }
         catch (Throwable $e)
         {
-            echo "Connection with PDO failed: " . $e->getMessage() . "<br>";
+            echo "PDO failed: " . $e->getMessage() . "<br>\n";
         }
 
         // Test MySQLi
+        echo "<br>\n<strong>Test with MySQLi</strong><br>\n";
         try
         {
+            // Create connection and do query
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
             $conn = new mysqli($servername, $username, $password, $dbname);
             $conn->set_charset("utf8mb4");
-            echo "Connected successfully (with MySQLi)<br>";
+            $res = $conn->query("SHOW DATABASES");
+
+            // Loop through the database names
+            $first = true;
+            while ($row = $res->fetch_array(MYSQLI_NUM))
+            {
+                if ($first)
+                {
+                    $first = false;
+                    echo "List of databases: ";
+                }
+                echo $row[0] . ' ';
+            }
+            echo "<br>\n";
+
+            // Close
+            $res->close();
             $conn->close();
         }
         catch (Throwable $e)
         {
-            echo "Connection with MySQLi failed: " . $e->getMessage() . "<br>";
+            echo "MySQLi failed: " . $e->getMessage() . "<br>\n";
         }
-        
-        echo "Note: \"Connection refused\" is returned when the DB server is starting.</pre>";
     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docker LAMP2</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docker LAMP2</title>
 </head>
 <body>
-    <h1>Docker LAMP2</h1>
-    <?php
-        // Information
-        echo "<h2>Information</h2>\n";
-        echo "<pre>";
-        echo "PHP Version:        " . phpversion() . "<br>";
-        echo "IP of webserver:    " . gethostbyname(gethostname()) . "<br>";
-        echo "User of webserver:  " . exec("whoami") . "<br>";
-        echo "IP of mysqldb:      " . gethostbyname("mysqldb") . "<br>";
-        echo "IP of mariadb:      " . gethostbyname("mariadb") . "<br>";
-        echo "IP of phpmyadmin:   " . gethostbyname("phpmyadmin") . "<br>";
-        echo "Int range and size: " . PHP_INT_MIN . " to " . PHP_INT_MAX . " (" . PHP_INT_SIZE . " bytes)" . "<br>";
-        echo "Year 2038 check:    " . (date("y", strtotime("2039-01-01")) == 39 ? "OK no bug" : "bug present!") . "<br>";
-        echo "</pre>";
+<h1>Docker LAMP2</h1>
+<?php
+    // Information
+    echo "<h2>Information</h2>\n";
+    echo "<pre>\n";
+    echo "PHP Version:        " . phpversion() . "\n";
+    echo "IP of webserver:    " . gethostbyname(gethostname()) . "\n";
+    echo "User of webserver:  " . exec("whoami") . "\n";
+    echo "IP of mysqldb:      " . gethostbyname("mysqldb") . "\n";
+    echo "IP of mariadb:      " . gethostbyname("mariadb") . "\n";
+    echo "IP of phpmyadmin:   " . gethostbyname("phpmyadmin") . "\n";
+    echo "Int range and size: " . PHP_INT_MIN . " to " . PHP_INT_MAX . " (" . PHP_INT_SIZE . " bytes)" . "\n";
+    echo "Year 2038 check:    " . (date("y", strtotime("2039-01-01")) == 39 ? "OK no bug" : "bug present!") . "\n";
+    echo "</pre>\n";
 
-        // Test DB connections
-        testDBConnection("mysqldb:3306", "blogdb", "blog", "1234");
-        testDBConnection("mariadb:3306", "blogdb", "blog", "1234");
-    ?>
-    <hr>
-    <a href="phpinfo.php" target="_blank">Show PHP info</a>
+    // Test DB connections
+    echo "<p>For the following tests a \"Connection refused\" may be returned when the DB server is starting.</p>\n";
+    testDBConnection("mysqldb:3306", "blogdb", "blog", "1234");
+    testDBConnection("mariadb:3306", "blogdb", "blog", "1234");
+?>
+<br>
+<hr>
+<a href="phpinfo.php" target="_blank">Show PHP info</a>
 </body>
 </html>

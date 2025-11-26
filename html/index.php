@@ -80,7 +80,7 @@
     echo "<pre>\n";
     echo "PHP Version:        " . phpversion() . "\n";
     echo "IP of webserver:    " . gethostbyname(gethostname()) . "\n";
-    echo "User of webserver:  " . exec("whoami") . "\n";
+    echo "Id of webserver:    " . exec("id") . "\n";
     echo "IP of mysqldb:      " . gethostbyname("mysqldb") . "\n";
     echo "IP of mariadb:      " . gethostbyname("mariadb") . "\n";
     echo "IP of phpmyadmin:   " . gethostbyname("phpmyadmin") . "\n";

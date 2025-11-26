@@ -42,9 +42,21 @@ git clone https://github.com/contaware/docker-lamp2.git
 
 There are two apache servers, the first is listening on <http://localhost:8888> and the second on <http://localhost:8880>. Change the ports in *./compose.yaml* file.
 
-Place your web project files into *./html/* directory.
+The PHP version is selected in *./compose.yaml* by providing the *Dockerfile* corresponding to the wanted version.
 
-The PHP version is selected in *./compose.yaml* through a *Dockerfile*.
+Place your web project files into the *./html/* directory. By copying files from your host into *./html/*, the resulting owner in the container should be **www-data** (the user of the running apache server). If that's not the case, while the servers are running, correct your files by opening a container shell:
+
+```bash
+docker compose exec -u root web1 /bin/bash
+# or
+docker compose exec -u root web2 /bin/bash
+```
+
+and in the container shell change the owner to **www-data**:
+
+```bash
+chown -R www-data:www-data /var/www/html/
+```
 
 ### Database Servers
 

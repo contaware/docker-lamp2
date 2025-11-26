@@ -1,9 +1,8 @@
 # LAMP2 stack built with Docker Compose
 
-A Dual LAMP (Linux Apache MySQL PHP) stack environment built using Docker Compose. It is meant for local development and not for production usage. It consists of:
+A Dual LAMP (Linux Apache MySQL PHP) stack environment built using Docker Compose. It is meant for local development and not for production usage. It runs simultaneously:
 
-- PHP
-- Two Apache servers, with two different PHP versions
+- An Apache web server with configurable PHP version and Xdebug support
 - Two database servers, MySQL and MariaDB
 - phpMyAdmin (it's possible to choose between MySQL and MariaDB)
 
@@ -38,18 +37,16 @@ git clone https://github.com/contaware/docker-lamp2.git
    If a *Dockerfile* has been changed, run:  
    `docker compose up -d --build`
 
-### Web Servers and PHP
+### Web Server and PHP
 
-There are two apache servers, the first is listening on <http://localhost:8888> and the second on <http://localhost:8880>. Change the ports in *./compose.yaml* file.
+The apache server is listening on <http://localhost:8888>. Change the port in *./compose.yaml* file.
 
 The PHP version is selected in *./compose.yaml* by providing the *Dockerfile* corresponding to the wanted version.
 
-Place your web project files into the *./html/* directory. By copying files from your host into *./html/*, the resulting owner in the container should be **www-data** (the user of the running apache server). If that's not the case, while the servers are running, correct your files by opening a container shell:
+Place your web project files into the *./html/* directory, the resulting owner in the container should be **www-data** (the apache server runs as this user). If that's not the case, while the apache server is running, correct your files by opening a container shell:
 
 ```bash
-docker compose exec -u root web1 /bin/bash
-# or
-docker compose exec -u root web2 /bin/bash
+docker compose exec -u root web /bin/bash
 ```
 
 and in the container shell change the owner to **www-data**:

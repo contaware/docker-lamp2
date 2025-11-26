@@ -1,23 +1,10 @@
 services:
-  web1:
+  web:
     build:
       context: .
       dockerfile: Dockerfile-8.4       # set the wanted php version through the corresponding Dockerfile
     ports:
       - "8888:80"                      # map your computer port to the container port
-    depends_on:
-      - mysqldb
-      - mariadb
-    volumes:
-      - ./html:/var/www/html           # map content of ./html in your computer to /var/www/html of container
-      - ./xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini    # map xdebug.ini into the container
-      - ./error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini # map error_reporting.ini into the container
-  web2:
-    build:
-      context: .
-      dockerfile: Dockerfile-8.2       # set the wanted php version through the corresponding Dockerfile
-    ports:
-      - "8880:80"                      # map your computer port to the container port
     depends_on:
       - mysqldb
       - mariadb

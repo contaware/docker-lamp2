@@ -10,9 +10,9 @@ services:
       - mariadb
     volumes:
       - ./html:/var/www/html           # map content of ./html in your computer to /var/www/html of container
-      - ./xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini    # map xdebug.ini into the container
-      - ./error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini # map error_reporting.ini into the container
-      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini                 # map uploads.ini into the container
+      - ./php_conf/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini    # map xdebug.ini into the container
+      - ./php_conf/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini # map error_reporting.ini into the container
+      - ./php_conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini                 # map uploads.ini into the container
   mysqldb:
     image: mysql:9.4                   # set the mysql version you need for your project
     environment:

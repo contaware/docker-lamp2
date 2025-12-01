@@ -9,6 +9,7 @@
         {
             // Create connection and do query
             $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
+            echo "Server version: " . $conn->getAttribute(PDO::ATTR_SERVER_VERSION) . "<br>\n";
             $res = $conn->query("SHOW DATABASES");
             
             // Loop through the database names
@@ -40,6 +41,7 @@
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
             $conn = new mysqli($servername, $username, $password, $dbname);
             $conn->set_charset("utf8mb4");
+            echo "Server version: " . $conn->server_info . "<br>\n";
             $res = $conn->query("SHOW DATABASES");
 
             // Loop through the database names
@@ -81,17 +83,15 @@
     echo "PHP Version:        " . phpversion() . "\n";
     echo "IP of webserver:    " . gethostbyname(gethostname()) . "\n";
     echo "Id of webserver:    " . exec("id") . "\n";
-    echo "IP of mysqldb:      " . gethostbyname("mysqldb") . "\n";
-    echo "IP of mariadb:      " . gethostbyname("mariadb") . "\n";
+    echo "IP of db:           " . gethostbyname("db") . "\n";
     echo "IP of phpmyadmin:   " . gethostbyname("phpmyadmin") . "\n";
     echo "Int range and size: " . PHP_INT_MIN . " to " . PHP_INT_MAX . " (" . PHP_INT_SIZE . " bytes)" . "\n";
     echo "Year 2038 check:    " . (date("y", strtotime("2039-01-01")) == 39 ? "OK no bug" : "bug present!") . "\n";
     echo "</pre>\n";
 
-    // Test DB connections
+    // Test DB connection
     echo "<p>For the following tests a \"Connection refused\" may be returned when the DB server is starting.</p>\n";
-    testDBConnection("mysqldb:3306", "blogdb", "blog", "1234");
-    testDBConnection("mariadb:3306", "blogdb", "blog", "1234");
+    testDBConnection("db:3306", "blogdb", "blog", "1234");
 ?>
 <br>
 <hr>

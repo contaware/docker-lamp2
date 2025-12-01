@@ -23,7 +23,7 @@ services:
     volumes:
       - ./db_data:/var/lib/mysql       # map content of ./db_data in your computer to /var/lib/mysql of container
   phpmyadmin:
-    image: phpmyadmin:5.2.2            # set the phpmyadmin version. Example: phpmyadmin:5.2.2
+    image: phpmyadmin:5.2.3            # set the phpmyadmin version. Example: phpmyadmin:5.2.3
     ports:
       - "8080:80"                      # map your computer port to the container port
     depends_on:

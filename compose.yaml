@@ -13,7 +13,7 @@ services:
       - ./php_conf/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini # map error_reporting.ini into the container
       - ./php_conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini                 # map uploads.ini into the container
   db:
-    image: mariadb:10.6                # set the database server and version. Example: mariadb:10.6 or mysql:9.4
+    image: mariadb:10.11               # set the database server and version. Example: mariadb:10.11 or mysql:9.4
     environment:
       - MYSQL_ROOT_PASSWORD=1234       # set mysql root pw or use: MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=blogdb          # this is optional, name a database to be created on image creation

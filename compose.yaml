@@ -2,7 +2,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile-8.4       # set the wanted php version through the corresponding Dockerfile
+      dockerfile: Dockerfile-8.5       # set the wanted php version through the corresponding Dockerfile
     ports:
       - "8888:80"                      # map your computer port to the container port
     depends_on:

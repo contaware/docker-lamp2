@@ -78,6 +78,7 @@
 <h1>Docker LAMP2</h1>
 <?php
     // Information
+    date_default_timezone_set('UTC');
     echo "<h2>Information</h2>\n";
     echo "<pre>\n";
     echo "PHP Version:        " . phpversion() . "\n";
@@ -85,8 +86,8 @@
     echo "Id of webserver:    " . exec("id") . "\n";
     echo "IP of db:           " . gethostbyname("db") . "\n";
     echo "IP of phpmyadmin:   " . gethostbyname("phpmyadmin") . "\n";
-    echo "Int range and size: " . PHP_INT_MIN . " to " . PHP_INT_MAX . " (" . PHP_INT_SIZE . " bytes)" . "\n";
-    echo "Year 2038 check:    " . (date("y", strtotime("2039-01-01")) == 39 ? "OK no bug" : "bug present!") . "\n";
+    echo "Int size:           " . PHP_INT_SIZE . " bytes" . "\n";
+    echo "Year 2038 check:    " . (date("y", @strtotime("2039-01-01")) == 39 ? "OK no bug" : "bug present!") . "\n";
     echo "</pre>\n";
 
     // Test DB connection

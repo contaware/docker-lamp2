@@ -43,16 +43,28 @@ The apache server is listening on <http://localhost:8888>. Change the port in *.
 
 The PHP version is selected in *./compose.yaml* by providing the *Dockerfile* corresponding to the wanted version.
 
-Place your web project files into the *./html/* directory, the resulting owner in the container should be **www-data** (the apache server runs as this user). If that's not the case, while the apache server is running, correct your files by opening a container shell:
+To prevent common warnings, edit *./php_conf/error_reporting.ini* like:
+
+```
+error_reporting=E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED
+```
+- Note: since PHP 8.4 `E_STRICT` is not used anymore.
+
+Place your web project files into the *./html/* directory, the resulting owner in the container should be **www-data** (the apache server runs as this user) and usually that user should have write permissions. If that's not the case, while the apache server is running, correct your files by opening a container shell:
 
 ```bash
 docker compose exec -u root web /bin/bash
 ```
 
-and in the container shell change the owner to **www-data**:
+and in the container shell run the following commands:
 
 ```bash
+# Change the owner to www-data 
 chown -R www-data:www-data /var/www/html/
+
+# Update permissions
+find /var/www/html/ -type f ! -perm 644 -exec chmod 644 {} +
+find /var/www/html/ -type d ! -perm 755 -exec chmod 755 {} +
 ```
 
 ### Database Server

@@ -8,7 +8,8 @@
         try
         {
             // Create connection and do query
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", 
+                $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             echo "Server version: " . $conn->getAttribute(PDO::ATTR_SERVER_VERSION) . "<br>\n";
             $res = $conn->query("SHOW DATABASES");
             

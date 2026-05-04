@@ -8,13 +8,13 @@
 <body>
 <h1>Environment var</h1>
 <?php
-echo '$_SERVER: ';
+echo "\$_SERVER: ";
 if (isset($_SERVER['MYVAR']))
     echo htmlspecialchars($_SERVER['MYVAR'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-echo '<br>$_ENV: ';
+echo "<br>\n\$_ENV: ";
 if (isset($_ENV['MYVAR']))
     echo htmlspecialchars($_ENV['MYVAR'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-echo '<br>getenv(): ' . htmlspecialchars(getenv('MYVAR'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+echo "<br>\ngetenv(): " . htmlspecialchars(getenv('MYVAR'), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . "<br>\n";
 ?>
 </body>
 </html>
